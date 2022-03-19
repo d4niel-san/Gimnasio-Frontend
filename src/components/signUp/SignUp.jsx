@@ -11,15 +11,39 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { FormatAlignRightSharp } from "@mui/icons-material";
+import axios from "axios";
 
 const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    /*console.log({
       email: data.get("email"),
       password: data.get("password"),
-    });
+    });*/
+    const newUser = ({
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+      allowExtraEmails: data.has("allowExtraEmails")
+    })
+    console.log(newUser);
+    
+    axios.post('http://localhost:5000/newUser', {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+      allowExtraEmails: data.has("allowExtraEmails")
+    })
+      .then((response) => {
+          console.log(response.data)
+      })
+      .catch((error)=> {
+          console.log(error);
+      })
   };
 
   return (
@@ -89,7 +113,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
+                control={<Checkbox name='allowExtraEmails' value='allowExtraEmails' color='primary' />}
                 label='I want to receive inspiration, marketing promotions and updates via email.'
               />
             </Grid>

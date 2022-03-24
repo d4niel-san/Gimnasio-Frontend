@@ -11,40 +11,41 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { FormatAlignRightSharp } from "@mui/icons-material";
 import axios from "axios";
 
+
+
 const SignUp = () => {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    /*console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });*/
-    const newUser = ({
+    const newUser = {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
       allowExtraEmails: data.has("allowExtraEmails")
-    })
+    }
     console.log(newUser);
-    
-    axios.post('http://localhost:5000/newUser', {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      allowExtraEmails: data.has("allowExtraEmails")
-    })
+    newUserToBack(newUser);
+    /*
+    axios.post('http://localhost:5000/newUser', newUser)
       .then((response) => {
           console.log(response.data)
       })
       .catch((error)=> {
           console.log(error);
       })
+    */
   };
+  
+  async function newUserToBack(newUser){
+    const response = await axios.post('http://localhost:5000/newUser', newUser)
+    console.log(newUser)
+    console.log(response.data)
+  }
+
 
   return (
     <Container
@@ -138,5 +139,7 @@ const SignUp = () => {
     </Container>
   );
 };
+
+
 
 export default SignUp;

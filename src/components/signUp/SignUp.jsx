@@ -21,13 +21,15 @@ const SignUp = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const newUser = {
+      method: 'POST',
+      url: 'http://localhost:5000/newUser',
+      params: {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
-      allowExtraEmails: data.has("allowExtraEmails")
-    }
-    console.log(newUser);
+      suscribed: data.has("allowExtraEmails")
+    }}    
     newUserToBack(newUser);
     /*
     axios.post('http://localhost:5000/newUser', newUser)
@@ -41,9 +43,13 @@ const SignUp = () => {
   };
   
   async function newUserToBack(newUser){
-    const response = await axios.post('http://localhost:5000/newUser', newUser)
-    console.log(newUser)
-    console.log(response.data)
+    await axios.request(newUser)
+      .then((response) => {
+          console.log(response.status)
+      })
+      .catch((error)=> {
+          console.log(error);
+      })
   }
 
 

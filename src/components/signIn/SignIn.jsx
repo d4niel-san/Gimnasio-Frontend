@@ -14,16 +14,34 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import generalTheme from "../../themes/generalTheme";
 import backImg from "../../assets/signIn.jpg";
+import axios from "axios";
 
 const SignIn = () => {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const logUser = {
+      method: 'POST',
+      url: 'http://localhost:5000/logUser',
+      params: {
+        email: data.get("email"),
+        password: data.get("password")
+      }
+    }
+    console.log(logUser);
+    logUserToBack(logUser);
   };
+
+  async function logUserToBack(logUser){
+    await axios.request(logUser)
+    .then((response)=>{
+        console.log(response.data)
+    })
+    .catch((error)=> {
+        console.log(error)
+      })
+  }
 
   return (
     <Grid container component='main' sx={{ height: "100vh" }}>
@@ -60,8 +78,7 @@ const SignIn = () => {
             component='form'
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
-          >
+            sx={{ mt: 1 }}>
             <TextField
               margin='normal'
               required

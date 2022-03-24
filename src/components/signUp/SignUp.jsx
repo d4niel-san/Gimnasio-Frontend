@@ -24,29 +24,17 @@ const SignUp = () => {
       method: 'POST',
       url: 'http://localhost:5000/newUser',
       params: {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      suscribed: data.has("allowExtraEmails")
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
+        email: data.get("email"),
+        password: data.get("password"),
+        suscribed: data.has("allowExtraEmails")
     }}    
     newUserToBack(newUser);
-    /*
-    axios.post('http://localhost:5000/newUser', newUser)
-      .then((response) => {
-          console.log(response.data)
-      })
-      .catch((error)=> {
-          console.log(error);
-      })
-    */
   };
   
   async function newUserToBack(newUser){
     await axios.request(newUser)
-      .then((response) => {
-          console.log(response.status)
-      })
       .catch((error)=> {
           console.log(error);
       })
@@ -74,7 +62,11 @@ const SignUp = () => {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box 
+          component='form' 
+          noValidate 
+          onSubmit={handleSubmit} 
+          sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField

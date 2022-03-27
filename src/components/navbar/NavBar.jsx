@@ -12,9 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { ApiContext } from "../../context/apiContext";
-import { alpha } from "@mui/material";
-import { teal } from "@mui/material/colors";
-//import './NavBarStyles.scss';
+import * as Styles from './NavBarStyles';
 
 const settings = ["profile", "account", "dashboard", "logout"];
 
@@ -34,11 +32,7 @@ const NavBar = () => {
     <AppBar position='static'>
       <Container
         maxWidth='xl'
-        sx={{
-          position: "fixed",
-          backgroundColor: alpha(teal[500], 0.4),
-          zIndex: 10,
-        }}
+        sx={Styles.Container}
       >
         <Toolbar disableGutters>
           <Link

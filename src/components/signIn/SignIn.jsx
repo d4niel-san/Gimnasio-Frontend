@@ -12,39 +12,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import generalTheme from "../../themes/generalTheme";
-import backImg from "../../assets/signIn.jpg";
-import axios from "axios";
+import * as services from "./SignInServices"
+import * as styles from "./SignInStlyles"
 
 const SignIn = () => {
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const logUser = {
-      method: 'POST',
-      url: 'http://localhost:5000/logUser',
-      params: {
-        email: data.get("email"),
-        password: data.get("password")
-      }
-    }
-    console.log(logUser);
-    logUserToBack(logUser);
-  };
-
-  async function logUserToBack(logUser){
-    await axios.request(logUser)
-    .then((response)=>{
-        console.log(response.data)
-        if (!response.data){
-          alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
-        }
-    })
-    .catch((error)=> {
-        console.log(error)
-      })
-  }
 
   return (
     <Grid container component='main' sx={{ height: "100vh" }}>
@@ -54,22 +25,11 @@ const SignIn = () => {
         xs={false}
         sm={4}
         md={7}
-        sx={{
-          backgroundImage: `url(${backImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "top",
-        }}
+        sx={styles.Grid}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+          sx={styles.Box}
         >
           <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
@@ -80,7 +40,7 @@ const SignIn = () => {
           <Box
             component='form'
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={services.handleSubmit}
             sx={{ mt: 1 }}>
             <TextField
               margin='normal'
@@ -131,14 +91,7 @@ const SignIn = () => {
         <LinkRouter
           to='/'
           variant='body2'
-          style={{
-            my: 8,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textDecoration: "none",
-          }}
+          style={styles.LinkRouter}
         >
           <Button variant='outlined'>Home Page</Button>
         </LinkRouter>

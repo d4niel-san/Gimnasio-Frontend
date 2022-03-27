@@ -13,13 +13,17 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { ApiContext } from "../../context/apiContext";
 import * as Styles from './NavBarStyles';
+import * as services from "./NavBarServices"
 
 const settings = ["profile", "account", "dashboard", "logout"];
 
 const NavBar = () => {
+  
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { isUserLogged } = useContext(ApiContext);
 
+  //const isUserLogged = true;
+  const { isUserLogged } = useContext(ApiContext);
+/*
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -27,7 +31,7 @@ const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+*/
   return (
     <AppBar position='static'>
       <Container
@@ -37,7 +41,7 @@ const NavBar = () => {
         <Toolbar disableGutters>
           <Link
             to='/'
-            style={{ textDecoration: "none", flexGrow: 1, display: "flex" }}
+            style={Styles.Toolbar}
           >
             <Typography color='secondary' variant='h6' noWrap component='div'>
               LEGION GYM
@@ -47,7 +51,7 @@ const NavBar = () => {
           {isUserLogged ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton onClick={services.handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt='Remy Sharp' src='https://i.pravatar.cc/100' />
                 </IconButton>
               </Tooltip>
@@ -65,19 +69,15 @@ const NavBar = () => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={services.handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting} onClick={services.handleCloseUserMenu}>
                     <Link
                       to={`/${setting}`}
                       textAlign='center'
                       color='primary'
-                      style={{
-                        textDecoration: "none",
-                        textTransform: "capitalize",
-                        display: "block",
-                      }}
+                      style={Styles.Link}
                     >
                       <Typography color='primary'>{setting}</Typography>
                     </Link>

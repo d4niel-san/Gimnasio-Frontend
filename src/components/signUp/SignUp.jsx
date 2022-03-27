@@ -11,53 +11,22 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import axios from "axios";
-
-
+import * as services from "./SignUpServices"
+import * as styles from "./SignUpStyles"
 
 const SignUp = () => {
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const newUser = {
-      /*method: 'POST',
-      url: 'http://localhost:5000/newUser',
-      params: {*/
-        firstName: data.get("firstName"),
-        lastName: data.get("lastName"),
-        email: data.get("email"),
-        password: data.get("password"),
-        suscribed: data.has("allowExtraEmails")
-    }    
-    newUserToBack(newUser);
-  };
-  
-  async function newUserToBack(newUser){
-    await axios.post('http://localhost:5000/newUser', newUser)
-      .catch((error)=> {
-          console.log(error);
-      })
-    }
-  
-
 
   return (
     <Container
       component='main'
       maxWidth='xs'
-      sx={{ backgroundColor: "info.main" }}
+      sx={styles.Container}
     >
       <CssBaseline />
       <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+        sx={styles.Box}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={styles.Avatar}>
           <LockOutlinedIcon color='primary' />
         </Avatar>
         <Typography component='h1' variant='h5'>
@@ -66,7 +35,7 @@ const SignUp = () => {
         <Box 
           component='form' 
           noValidate 
-          onSubmit={handleSubmit} 
+          onSubmit={services.handleSubmit} 
           sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -122,7 +91,7 @@ const SignUp = () => {
             type='submit'
             fullWidth
             variant='contained'
-            sx={{ mt: 3, mb: 2 }}
+            sx={styles.Button}
           >
             Sign Up
           </Button>

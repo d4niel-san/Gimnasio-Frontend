@@ -7,6 +7,20 @@ const Container = {
     zIndex: 10
 }
 
+const Toolbar = { 
+    textDecoration: "none", 
+    flexGrow: 1, 
+    display: "flex" 
+}
+
+const Link = {
+    textDecoration: "none",
+    textTransform: "capitalize",
+    display: "block",
+  }
+
 export {
     Container, 
+    Link,
+    Toolbar
 };

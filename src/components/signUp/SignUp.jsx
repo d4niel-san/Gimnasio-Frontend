@@ -21,24 +21,25 @@ const SignUp = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const newUser = {
-      method: 'POST',
+      /*method: 'POST',
       url: 'http://localhost:5000/newUser',
-      params: {
+      params: {*/
         firstName: data.get("firstName"),
         lastName: data.get("lastName"),
         email: data.get("email"),
         password: data.get("password"),
         suscribed: data.has("allowExtraEmails")
-    }}    
+    }    
     newUserToBack(newUser);
   };
   
   async function newUserToBack(newUser){
-    await axios.request(newUser)
+    await axios.post('http://localhost:5000/newUser', newUser)
       .catch((error)=> {
           console.log(error);
       })
-  }
+    }
+  
 
 
   return (
@@ -127,7 +128,7 @@ const SignUp = () => {
           </Button>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link href='#' variant='body2'>
+              <Link href='/SignIn' variant='body2'>
                 Already have an account? Sign in
               </Link>
             </Grid>

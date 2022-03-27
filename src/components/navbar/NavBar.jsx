@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { ApiContext } from "../../context/apiContext";
 import { alpha } from "@mui/material";
 import { teal } from "@mui/material/colors";
+//import './NavBarStyles.scss';
 
 const settings = ["profile", "account", "dashboard", "logout"];
 
@@ -94,7 +94,7 @@ const NavBar = () => {
           ) : (
             <Link to='signIn' style={{ textDecoration: "none" }}>
               <Button color='primary' size='small' variant='contained'>
-                Iniciar Sesión
+                Sign In
               </Button>
             </Link>
           )}

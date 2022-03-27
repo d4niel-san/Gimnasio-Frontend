@@ -37,6 +37,9 @@ const SignIn = () => {
     await axios.request(logUser)
     .then((response)=>{
         console.log(response.data)
+        if (!response.data){
+          alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
+        }
     })
     .catch((error)=> {
         console.log(error)
@@ -118,7 +121,7 @@ const SignIn = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='#' variant='body2'>
+                <Link href='/' variant='body2'>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -137,7 +140,7 @@ const SignIn = () => {
             textDecoration: "none",
           }}
         >
-          <Button variant='outlined'>Volver a Inicio</Button>
+          <Button variant='outlined'>Home Page</Button>
         </LinkRouter>
       </Grid>
     </Grid>

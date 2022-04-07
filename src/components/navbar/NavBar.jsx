@@ -21,17 +21,10 @@ const NavBar = () => {
   
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  //const isUserLogged = true;
-  const { isUserLogged } = useContext(ApiContext);
-/*
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    const { isUserLogged } = useContext(ApiContext);
+  console.log(isUserLogged)
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-*/
+
   return (
     <AppBar position='static'>
       <Container
@@ -75,7 +68,7 @@ const NavBar = () => {
                   <MenuItem key={setting} onClick={services.handleCloseUserMenu}>
                     <Link
                       to={`/${setting}`}
-                      textAlign='center'
+                      //textAlign='center'
                       color='primary'
                       style={Styles.Link}
                     >

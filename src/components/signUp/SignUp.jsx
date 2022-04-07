@@ -1,4 +1,4 @@
-import * as React from "react";
+//import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,10 +11,13 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import * as services from "./SignUpServices"
+import { ApiContext } from "../../context/apiContext";
 import * as styles from "./SignUpStyles"
+import React, { useContext } from "react";
 
 const SignUp = () => {
+
+  const { SignUpSubmit } = useContext(ApiContext)
 
   return (
     <Container
@@ -35,7 +38,7 @@ const SignUp = () => {
         <Box 
           component='form' 
           noValidate 
-          onSubmit={services.handleSubmit} 
+          onSubmit={SignUpSubmit} 
           sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

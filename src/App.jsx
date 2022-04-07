@@ -15,13 +15,7 @@ const App = () => {
         <ThemeProvider theme={generalTheme}>
           <CssBaseline />
           <Box
-            sx={{
-              backgroundImage: `url(${backgroundImg})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "100vh",
-            }}
+            sx={BoxStyle}
           >
             <Routes>
               <Route path='/signIn' element={<SignIn />} />
@@ -34,5 +28,14 @@ const App = () => {
 
   );
 };
+
+const BoxStyle ={
+  backgroundImage: `url(${backgroundImg})`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  height: "100vh",
+}
+
 
 export default App;

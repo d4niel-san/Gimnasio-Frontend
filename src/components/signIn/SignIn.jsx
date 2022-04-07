@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,10 +12,13 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import * as services from "./SignInServices"
 import * as styles from "./SignInStlyles"
+import { ApiContext } from "../../context/apiContext";
+
 
 const SignIn = () => {
+
+  const { SignInSubmit } = useContext(ApiContext)
 
   return (
     <Grid container component='main' sx={{ height: "100vh" }}>
@@ -40,7 +43,7 @@ const SignIn = () => {
           <Box
             component='form'
             noValidate
-            onSubmit={services.handleSubmit}
+            onSubmit={SignInSubmit}
             sx={{ mt: 1 }}>
             <TextField
               margin='normal'

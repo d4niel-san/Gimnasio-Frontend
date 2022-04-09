@@ -4,6 +4,7 @@ import Home from "./components/home";
 import { Context } from "./context/apiContext";
 import generalTheme from "./themes/generalTheme";
 import SignIn from "./components/signIn";
+import UserMain from "./components/userMain/UserMain";
 import "./App.css";
 import { Box, CssBaseline } from "@mui/material";
 import backgroundImg from "./assets/home.jpg";
@@ -19,6 +20,7 @@ const App = () => {
           >
             <Routes>
               <Route path='/signIn' element={<SignIn />} />
+              <Route path='/userMain' element={<UserMain/>} />
               <Route path='/' element={<Home />} />
             </Routes>
           </Box>

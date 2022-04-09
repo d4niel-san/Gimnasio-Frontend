@@ -22,8 +22,6 @@ const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
     const { isUserLogged } = useContext(ApiContext);
-  console.log(isUserLogged)
-
 
   return (
     <AppBar position='static'>

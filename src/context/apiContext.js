@@ -1,15 +1,37 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const ApiContext = React.createContext(0);
 export const Context = ({ children }) => {
 
   const [isUserLogged, setIsUserLogged] = useState(false);
+  const [userLogged, setUserLogged] = useState();
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (userLogged !== undefined) {
+      alert("Bienvenido " + userLogged.firstName)
+      setIsUserLogged(true)
+    }
+  }, [userLogged])
+  
+  const logUserToBack = async (logUser) => {
+    await axios.post('http://localhost:5000/logUser', logUser)
+    .then((response) => {
+      if (!response.data) {
+        alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
+      } else {
+        setUserLogged(response.data)
+        navigate("/userMain", { replace: true })
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   const SignInSubmit = (event) => {
-    console.log("entre");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const logUser = {
@@ -18,22 +40,6 @@ export const Context = ({ children }) => {
     }
     logUserToBack(logUser);
   };
-
-  const logUserToBack = async (logUser) => {
-    await axios.post('http://localhost:5000/logUser', logUser)
-      .then((response) => {
-        if (!response.data) {
-          alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
-        } else {
-          alert("Bienvenido " + response.data)
-          setIsUserLogged(true)
-          navigate("/", { replace: true });
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
 
   const SignUpSubmit = (event) => {
     event.preventDefault();
@@ -53,7 +59,6 @@ export const Context = ({ children }) => {
       .then((response) => {
         alert("Bienvenido " + newUser.firstName)
         setIsUserLogged(true)
-        navigate("/", { replace: true })
       })
       .catch((error) => {
         console.log(error);
@@ -65,6 +70,8 @@ export const Context = ({ children }) => {
       value={{
         isUserLogged,
         setIsUserLogged,
+        userLogged, 
+        setUserLogged,
         SignInSubmit,
         SignUpSubmit,
       }}
@@ -73,8 +80,3 @@ export const Context = ({ children }) => {
     </ApiContext.Provider>
   );
 };
-
-
-/*  useEffect(() => {
-    console.log("Cambie userlogged", isUserLogged)
-  }, [isUserLogged])*/

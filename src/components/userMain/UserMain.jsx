@@ -1,13 +1,19 @@
 
-import { Box, Container, TextField } from '@mui/material';
+import { Box, Checkbox, Container, FormControlLabel, TextField } from '@mui/material';
 import NavBar from '../navbar';
 import * as styles from './userMainStlyles';
 import { ApiContext } from "../../context/apiContext";
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 const UserMain = () => {
 
   const { userLogged, isUserLogged } = useContext(ApiContext)
+
+  const [checked, setChecked] = useState(userLogged.suscribed);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   return(
       <>
@@ -18,18 +24,55 @@ const UserMain = () => {
       maxWidth='xs'
       sx={styles.Container}
       >Configuracion de Usuario
-        <Box
-          sx={styles.Box}
-        >
-          <TextField
-          autoComplete='given-name'
-          name='firstName'
-          id='filled-basic'//firstName'
-          label='First Name'
-          autoFocus
-          />
-          <TextField id="filled-basic" label="First Name" variant="filled" />
-        </Box>
+          <Box
+            sx={styles.Box2}
+          >
+            <div>
+              <TextField
+              autoComplete='given-name'
+              name='firstName'
+              id='outlined-multiline-flexible'
+              label='First Name'
+              value={userLogged.firstName}
+              autoFocus
+              disabled
+              />
+              <TextField
+              autoComplete='given-name'
+              name='lastName'
+              id='outlined-multiline'
+              label='Last Name'
+              value={userLogged.lastName}
+              autoFocus
+              disabled
+              />
+            </div>
+          </Box>
+
+            <Box
+              sx={styles.Box}
+            >
+              <TextField
+              autoComplete='given-name'
+              name='email'
+              id='filled-basic'
+              label='E-Mail'
+              value={userLogged.email}
+              autoFocus
+              fullWidth
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox 
+                    name='suscribed' 
+                    color='primary'
+                    checked={checked}
+                    onChange={handleChange}
+                    />
+                  }
+                label='Suscribed to inspiration, marketing promotions and updates via email.'
+              />
+            </Box>
       
       </Container>
       </>

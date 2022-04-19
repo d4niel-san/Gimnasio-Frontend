@@ -52,13 +52,19 @@ export const Context = ({ children }) => {
       suscribed: data.has("allowExtraEmails")
     }
     newUserToBack(newUser);
+
+    
   };
 
   async function newUserToBack(newUser) {
     await axios.post('http://localhost:5000/newUser', newUser)
       .then((response) => {
-        alert("Bienvenido " + newUser.firstName)
         setIsUserLogged(true)
+        const logUser = {
+          email: newUser.email,
+          password: newUser.password
+        }
+        logUserToBack(logUser);
       })
       .catch((error) => {
         console.log(error);

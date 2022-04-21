@@ -1,7 +1,7 @@
 
 
 const Container = { 
-  backgroundColor: "info.main" 
+  backgroundColor: "third.main" 
 }
   
 

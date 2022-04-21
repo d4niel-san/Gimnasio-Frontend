@@ -9,7 +9,8 @@ const Box = {
 
 const Avatar = { 
     m: 1, 
-    bgcolor: "secondary.main" }
+    bgcolor: "secondary.main" 
+}
 
 const Button = { 
     mt: 3, 
@@ -17,12 +18,17 @@ const Button = {
 }
 
 const Container = { 
-    backgroundColor: "info.main" 
+    backgroundColor: "third.main" 
+}
+
+const TextSize = {
+    fontSize: 12,
 }
 
 export {
     Avatar,
+    TextSize,
     Box,
     Button,
-    Container
+    Container,
 };

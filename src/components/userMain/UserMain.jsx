@@ -7,7 +7,7 @@ import { useContext, useState } from 'react';
 
 const UserMain = () => {
 
-  const { userLogged, isUserLogged } = useContext(ApiContext)
+  const { userLogged } = useContext(ApiContext)
 
   const [checked, setChecked] = useState(userLogged.suscribed);
 

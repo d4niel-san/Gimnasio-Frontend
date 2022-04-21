@@ -1,4 +1,3 @@
-//import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,60 +14,21 @@ import { ApiContext } from "../../context/apiContext";
 import * as styles from "./SignUpStyles"
 import React, { useContext, useState } from "react";
 import { MenuItem } from "@mui/material";
+import paymentMethods from "./Suscriptions";
+import suscriptionAlert from "./suscriptionAlert";
 
 const SignUp = () => {
 
   const { SignUpSubmit } = useContext(ApiContext)
+  const initialPayment = paymentMethods.filter(elem => elem.id===4)[0]
+  const [paymentMethod, setPaymentMethod] = useState(initialPayment.value);
+  const [cost, setCost] = useState(initialPayment.cash);
 
-  const paymentMethods = [
-    {
-      id: 1,
-      value: 'daily',
-      label: '1. Daily',
-      cash: 2000  
-    },
-    {
-      id: 2,
-      value: 'weekly',
-      label: '2. Weekly',
-      cash: 10000  
-    }, 
-    {
-      id: 3,
-      value: 'biweekly',
-      label: '3. Biweekly',
-      cash: 25000
-    }, 
-    {
-      id: 4,
-      value: 'monthly',
-      label: '4. Monthly',
-      cash: 40000
-    }, 
-    {
-      id: 5,
-      value: 'semiAnnual',
-      label: '5. Semi-Annual',
-      cash: 150000
-    }, 
-    {
-      id: 6,
-      value: 'annual',
-      label: '6. Annual',
-      cash: 250000
-    }
-  ]
-
-    const initialPayment = paymentMethods.filter(elem => elem.id===4)[0]
-
-    const [paymentMethod, setPaymentMethod] = useState(initialPayment.value);
-    const [cost, setCost] = useState(initialPayment.cash);
-  
-    const handleChange = (event) => {
-      const payment = paymentMethods.filter(elem => elem.value===event.target.value)[0]
-      setPaymentMethod(payment.value);
-      setCost(payment.cash);
-    };
+  const handleChange = (event) => {
+    const payment = paymentMethods.filter(elem => elem.value===event.target.value)[0]
+    setPaymentMethod(payment.value);
+    setCost(payment.cash);
+  };
 
   return (
     <Container
@@ -136,7 +96,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox name='allowExtraEmails' value='allowExtraEmails' color='primary' />}
+                control={<Checkbox name='allowExtraEmails' value='allowExtraEmails' color='primary'/>}
                 label='I want to receive inspiration, marketing promotions and updates via email.'
               />
             </Grid>
@@ -173,8 +133,12 @@ const SignUp = () => {
                 value={cost}
               />
             </Grid>
-
           </Grid>
+          
+          <div>
+            {suscriptionAlert(paymentMethods.filter(elem => elem.value===paymentMethod)[0].id)}
+          </div>
+          
           <Button
             type='submit'
             fullWidth

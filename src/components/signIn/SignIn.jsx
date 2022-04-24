@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,7 +18,15 @@ import { ApiContext } from "../../context/apiContext";
 
 const SignIn = () => {
 
-  const { SignInSubmit } = useContext(ApiContext)
+  const { SignInSubmit, setShowNavBar } = useContext(ApiContext)
+  
+  useEffect( ()=>{
+    setShowNavBar(false)
+    return (() => {
+      setShowNavBar(true)
+    })
+  })
+  
 
   return (
     <Grid container component='main' sx={{ height: "100vh" }}>

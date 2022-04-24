@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
 import { ApiContext } from "../../context/apiContext";
 import SignUp from "../signUp";
-import NavBar from "../navbar";
 
 const Home = () => {
   const { isUserLogged } = useContext(ApiContext);
-
   const DashboardWithLogin = () => {
     return (
       <>
-        <NavBar />
         <SignUp />
       </>
     );
@@ -18,7 +15,6 @@ const Home = () => {
   const DashboardWithoutLogin = () => {
     return (
       <>
-        <NavBar />
       </>
     );
   };

@@ -1,21 +1,21 @@
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
+import { MenuItem, Snackbar } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
-import { ApiContext } from "../../context/apiContext";
-import * as styles from "./SignUpStyles"
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import React, { useContext, useState } from "react";
-import { MenuItem } from "@mui/material";
-import paymentMethods from "./Suscriptions";
+import { ApiContext } from "../../context/apiContext";
+import * as styles from "./SignUpStyles";
 import suscriptionAlert from "./suscriptionAlert";
+import paymentMethods from "./Suscriptions";
 
 const SignUp = () => {
 
@@ -23,11 +23,17 @@ const SignUp = () => {
   const initialPayment = paymentMethods.filter(elem => elem.id===4)[0]
   const [paymentMethod, setPaymentMethod] = useState(initialPayment.value);
   const [cost, setCost] = useState(initialPayment.cash);
+  const [open, setOpen] = useState(false);
+  //const [toastText, setToastText] = useState('');
+
+  const handleClose = () => setOpen(false);
 
   const handleChange = (event) => {
     const payment = paymentMethods.filter(elem => elem.value===event.target.value)[0]
     setPaymentMethod(payment.value);
     setCost(payment.cash);
+    //setToastText(payment.toastText);
+    setOpen(true);
   };
 
   return (
@@ -137,8 +143,13 @@ const SignUp = () => {
               />
             </Grid>
           </Grid>
-          
-          {suscriptionAlert(paymentMethods.filter(elem => elem.value===paymentMethod)[0].id)}
+          <Snackbar
+            open={open}
+            autoHideDuration={4000}
+            onClose={handleClose}
+          >
+          {suscriptionAlert(paymentMethods.filter(elem => elem.value===paymentMethod)[0].id , setOpen)}
+          </Snackbar> 
           
           <Grid item xs={12}>
             <FormControlLabel

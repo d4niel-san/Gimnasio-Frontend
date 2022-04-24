@@ -7,6 +7,8 @@ export const Context = ({ children }) => {
 
   const [isUserLogged, setIsUserLogged] = useState(false);
   const [userLogged, setUserLogged] = useState();
+  const [showNavBar, setShowNavBar] = useState(true);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -15,15 +17,15 @@ export const Context = ({ children }) => {
       setIsUserLogged(true)
     }
   }, [userLogged])
-  
+
   const logUserToBack = async (logUser) => {
     await axios.post('http://localhost:5000/logUser', logUser)
-    .then((response) => {
-      if (!response.data) {
-        alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
-      } else {
-        setUserLogged(response.data)
-        navigate("/userMain", { replace: true })
+      .then((response) => {
+        if (!response.data) {
+          alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
+        } else {
+          setUserLogged(response.data)
+          navigate("/userMain", { replace: true })
         }
       })
       .catch((error) => {
@@ -53,7 +55,7 @@ export const Context = ({ children }) => {
     }
     newUserToBack(newUser);
 
-    
+
   };
 
   async function newUserToBack(newUser) {
@@ -76,10 +78,12 @@ export const Context = ({ children }) => {
       value={{
         isUserLogged,
         setIsUserLogged,
-        userLogged, 
+        userLogged,
         setUserLogged,
         SignInSubmit,
         SignUpSubmit,
+        showNavBar,
+        setShowNavBar
       }}
     >
       {children}

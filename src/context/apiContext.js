@@ -1,10 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ApiContext = React.createContext(0);
-export const Context = ({ children }) => {
 
+export const Context = ({ children }) => {
   const [isUserLogged, setIsUserLogged] = useState(false);
   const [userLogged, setUserLogged] = useState();
   const [showNavBar, setShowNavBar] = useState(true);
@@ -13,33 +13,34 @@ export const Context = ({ children }) => {
 
   useEffect(() => {
     if (userLogged !== undefined) {
-      alert("Bienvenido " + userLogged.firstName)
-      setIsUserLogged(true)
+      alert('Bienvenido ' + userLogged.firstName);
+      setIsUserLogged(true);
     }
-  }, [userLogged])
+  }, [userLogged]);
 
   const logUserToBack = async (logUser) => {
-    await axios.post('http://localhost:5000/logUser', logUser)
+    await axios
+      .post('http://localhost:5000/logUser', logUser)
       .then((response) => {
         if (!response.data) {
-          alert("nombre de usuario o contraseña invalida, por favor intente nuevamente")
+          alert('nombre de usuario o contraseña invalida, por favor intente nuevamente');
         } else {
-          setUserLogged(response.data)
-          navigate("/userMain", { replace: true })
+          setUserLogged(response.data);
+          navigate('/userMain', { replace: true });
         }
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   const SignInSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const logUser = {
-      email: data.get("email"),
-      password: data.get("password")
-    }
+      email: data.get('email'),
+      password: data.get('password')
+    };
     logUserToBack(logUser);
   };
 
@@ -47,30 +48,29 @@ export const Context = ({ children }) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const newUser = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      suscribed: data.has("allowExtraEmails")
-    }
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
+      suscribed: data.has('allowExtraEmails')
+    };
     newUserToBack(newUser);
-
-
   };
 
   async function newUserToBack(newUser) {
-    await axios.post('http://localhost:5000/newUser', newUser)
+    await axios
+      .post('http://localhost:5000/newUser', newUser)
       .then((response) => {
-        setIsUserLogged(true)
+        setIsUserLogged(true);
         const logUser = {
           email: newUser.email,
           password: newUser.password
-        }
+        };
         logUserToBack(logUser);
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }
 
   return (
@@ -84,8 +84,7 @@ export const Context = ({ children }) => {
         SignUpSubmit,
         showNavBar,
         setShowNavBar
-      }}
-    >
+      }}>
       {children}
     </ApiContext.Provider>
   );

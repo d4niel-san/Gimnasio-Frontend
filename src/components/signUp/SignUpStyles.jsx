@@ -21,13 +21,14 @@ const Container = {
     backgroundColor: "third.main" 
 }
 
-const TextSize = {
+const suscriptionTextSize = {
     fontSize: 12,
+    marginTop: '1rem',
 }
 
 export {
     Avatar,
-    TextSize,
+    suscriptionTextSize,
     Box,
     Button,
     Container,

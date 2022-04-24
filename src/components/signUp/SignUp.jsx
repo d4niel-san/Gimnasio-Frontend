@@ -61,6 +61,7 @@ const SignUp = () => {
                 id='firstName'
                 label='First Name'
                 autoFocus
+                size='small'
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -71,6 +72,8 @@ const SignUp = () => {
                 label='Last Name'
                 name='lastName'
                 autoComplete='family-name'
+                size='small'
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -81,6 +84,8 @@ const SignUp = () => {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                size='small'
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -92,12 +97,8 @@ const SignUp = () => {
                 type='password'
                 id='password'
                 autoComplete='new-password'
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox name='allowExtraEmails' value='allowExtraEmails' color='primary'/>}
-                label='I want to receive inspiration, marketing promotions and updates via email.'
+                size='small'
+
               />
             </Grid>
 
@@ -113,6 +114,7 @@ const SignUp = () => {
                 select
                 value={paymentMethod}
                 onChange={handleChange}
+                size='small'
               >
                 {paymentMethods.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -131,14 +133,30 @@ const SignUp = () => {
                 name='cost'
                 autoComplete='family-name'
                 value={cost}
+                size='small'
               />
             </Grid>
           </Grid>
           
-          <div>
-            {suscriptionAlert(paymentMethods.filter(elem => elem.value===paymentMethod)[0].id)}
-          </div>
+          {suscriptionAlert(paymentMethods.filter(elem => elem.value===paymentMethod)[0].id)}
           
+          <Grid item xs={12}>
+            <FormControlLabel
+              sx={{marginTop: '1rem'}}
+              control={
+                <Checkbox 
+                  name='allowExtraEmails'
+                  value='allowExtraEmails'
+                  color='primary'
+                />
+              }
+              label={
+                <Typography sx={{fontSize: '0.85rem'}}>
+                  I want to receive inspiration, marketing promotions and updates via email.
+                </Typography>
+              }
+            />
+          </Grid>
           <Button
             type='submit'
             fullWidth
@@ -148,8 +166,8 @@ const SignUp = () => {
             Sign Up
           </Button>
           <Grid container justifyContent='flex-end'>
-            <Grid item>
-              <Link href='/SignIn' variant='body2'>
+            <Grid item sx={{marginBottom: '0.5rem'}}>
+              <Link href='/SignIn' variant='body2' sx={{fontSize: '0.75rem'}}>
                 Already have an account? Sign in
               </Link>
             </Grid>

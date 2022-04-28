@@ -12,14 +12,7 @@ import { ApiContext } from './context/apiContext';
 import generalTheme from './themes/generalTheme';
 
 const App = () => {
-
-
- 
-
-
-  
   const { showNavBar } = useContext(ApiContext);
-  console.log('showNavBar', showNavBar);
 
   return (
     <ThemeProvider theme={generalTheme}>
@@ -41,7 +34,8 @@ const BoxStyle = {
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  height: '100vh'
+  height: '100vh',
+  overflow: 'scroll'
 };
 
 export default App;

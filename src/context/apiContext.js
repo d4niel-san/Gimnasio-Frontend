@@ -1,7 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import api from './api';
 export const ApiContext = React.createContext(0);
 
 export const Context = ({ children }) => {
@@ -19,8 +18,8 @@ export const Context = ({ children }) => {
   }, [userLogged]);
 
   const logUserToBack = async (logUser) => {
-    await axios
-      .post('http://localhost:5000/logUser', logUser)
+    await api
+      .post('/loguser', logUser)
       .then((response) => {
         if (!response.data) {
           alert('nombre de usuario o contraseña invalida, por favor intente nuevamente');
@@ -58,8 +57,8 @@ export const Context = ({ children }) => {
   };
 
   async function newUserToBack(newUser) {
-    await axios
-      .post('http://localhost:5000/newUser', newUser)
+    await api
+      .post('/newUser', newUser)
       .then((response) => {
         setIsUserLogged(true);
         const logUser = {

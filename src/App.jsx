@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import backgroundImg from './assets/home.jpg';
+import Classes from './components/classes/Classes';
 import Home from './components/home';
 import NavBar from './components/navbar';
 import SignIn from './components/signIn';
@@ -22,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/userMain" element={<UserMain />} />
+          <Route path="/classes" element={<Classes />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Box>

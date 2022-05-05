@@ -6,9 +6,14 @@ export const ApiContext = React.createContext(0);
 export const Context = ({ children }) => {
   const [isUserLogged, setIsUserLogged] = useState(false);
   const [userLogged, setUserLogged] = useState();
+  const [classes, setClasses] = useState();
   const [showNavBar, setShowNavBar] = useState(true);
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    getClasses();
+  }, []);
 
   useEffect(() => {
     if (userLogged !== undefined) {
@@ -72,6 +77,12 @@ export const Context = ({ children }) => {
       });
   }
 
+  async function getClasses() {
+    await api.get('/classes').then((response) => {
+      setClasses(response.data);
+    });
+  }
+
   return (
     <ApiContext.Provider
       value={{
@@ -82,7 +93,8 @@ export const Context = ({ children }) => {
         SignInSubmit,
         SignUpSubmit,
         showNavBar,
-        setShowNavBar
+        setShowNavBar,
+        classes
       }}>
       {children}
     </ApiContext.Provider>

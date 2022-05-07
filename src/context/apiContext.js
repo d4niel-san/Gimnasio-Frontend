@@ -83,6 +83,11 @@ export const Context = ({ children }) => {
     });
   }
 
+  async function joinClass(idClase) {
+    const data = { idClase, userLogged };
+    await api.post('/joinClass', data).then((response) => {});
+  }
+
   return (
     <ApiContext.Provider
       value={{
@@ -94,7 +99,8 @@ export const Context = ({ children }) => {
         SignUpSubmit,
         showNavBar,
         setShowNavBar,
-        classes
+        classes,
+        joinClass
       }}>
       {children}
     </ApiContext.Provider>

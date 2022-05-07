@@ -1,6 +1,6 @@
-import { Box, Checkbox, Container, FormControlLabel, TextField } from '@mui/material';
+import { Box, Button, Checkbox, Container, FormControlLabel, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { ApiContext } from '../../context/apiContext';
 import * as styles from './userMainStlyles';
 
@@ -68,6 +68,11 @@ const UserMain = () => {
             label="Suscribed to inspiration, marketing promotions and updates via email."
           />
         </Box>
+        <Link to="/classes" style={{ textDecoration: 'none' }}>
+          <Button color="primary" size="small" variant="contained">
+            Listado de Clases
+          </Button>
+        </Link>
       </Container>
     </>
   );

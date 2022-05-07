@@ -20,6 +20,7 @@ const Classes = () => {
         classStartHour={element.classStartHour}
         classDescription={element.classDescription}
         image={element.image}
+        id={element._id}
       />
     ));
   };

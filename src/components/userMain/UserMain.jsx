@@ -2,6 +2,7 @@ import { Box, Button, Checkbox, Container, FormControlLabel, TextField } from '@
 import { useContext, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { ApiContext } from '../../context/apiContext';
+import ClassCardUser from './ClassCardUser';
 import * as styles from './userMainStlyles';
 
 const UserMain = () => {
@@ -17,6 +18,19 @@ const UserMain = () => {
     if (!userLogged) {
       Navigate('/', { replace: true });
     }
+  };
+
+  const ClassList = () => {
+    if (!userLogged.classes) return null;
+    return userLogged.classes.map((element) => (
+      <ClassCardUser
+        key={element._id}
+        Name={element.className}
+        teacherFirstName={element.teacherFirstName}
+        teacherLastName={element.teacherLastName}
+        classStartHour={element.classStartHour}
+      />
+    ));
   };
 
   return (
@@ -68,6 +82,11 @@ const UserMain = () => {
             label="Suscribed to inspiration, marketing promotions and updates via email."
           />
         </Box>
+        <br />
+        {
+          //ClassList(userLogged.classes)
+        }
+        <ClassList />
         <Link to="/classes" style={{ textDecoration: 'none' }}>
           <Button color="primary" size="small" variant="contained">
             Listado de Clases

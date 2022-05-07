@@ -1,3 +1,0 @@
-const handleJoin = () => ({});
-
-export { handleJoin };

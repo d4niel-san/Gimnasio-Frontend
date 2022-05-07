@@ -8,7 +8,7 @@ import * as styles from './ClassesStlyles';
 const Classes = () => {
   const { classes } = useContext(ApiContext);
 
-  const CondRend = () => {
+  const ClassList = () => {
     if (!classes) return null;
     return classes.map((element) => (
       <ClassCard
@@ -30,7 +30,7 @@ const Classes = () => {
       <NavBar />
       <Container component="main" maxWidth="xs" sx={styles.Container}>
         Clases disponibles
-        <CondRend />
+        <ClassList />
       </Container>
     </>
   );

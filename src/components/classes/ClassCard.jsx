@@ -22,9 +22,20 @@ const ClassCard = ({
   async function handleJoin() {
     const response = await joinClass(id);
     if (response) {
-      alert('Se ha registrdo correctamente a la clase');
+      alert('Se ha registrado correctamente a la clase');
     } else {
       alert('Ya se encontraba registrado en esa clase');
+    }
+  }
+
+  const { leaveClass } = React.useContext(ApiContext);
+
+  async function handleLeave() {
+    const response = await leaveClass(id);
+    if (response) {
+      alert('Se ha eliminado correctamente de la clase');
+    } else {
+      alert('No se encontraba registrado en esa clase');
     }
   }
 
@@ -55,7 +66,9 @@ const ClassCard = ({
           <Button size="small" onClick={handleJoin}>
             Join
           </Button>
-          <Button size="small">Leave</Button>
+          <Button size="small" onClick={handleLeave}>
+            Leave
+          </Button>
         </CardActions>
       </Card>
       <br />

@@ -90,6 +90,13 @@ export const Context = ({ children }) => {
     return apiResponse;
   }
 
+  async function leaveClass(idClase) {
+    const data = { idClase, userLogged };
+    let apiResponse;
+    await api.post('/leaveClass', data).then((response) => (apiResponse = response.data));
+    return apiResponse;
+  }
+
   return (
     <ApiContext.Provider
       value={{
@@ -102,7 +109,8 @@ export const Context = ({ children }) => {
         showNavBar,
         setShowNavBar,
         classes,
-        joinClass
+        joinClass,
+        leaveClass
       }}>
       {children}
     </ApiContext.Provider>

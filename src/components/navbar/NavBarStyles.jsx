@@ -1,26 +1,27 @@
-import { alpha } from "@mui/material";
-import { teal } from "@mui/material/colors";
+import { alpha } from '@mui/material';
+import { teal } from '@mui/material/colors';
+
+const AppBar = {
+  top: 0,
+  position: 'fixed'
+};
 
 const Container = {
-    position: "fixed",
-    backgroundColor: alpha(teal[500], 0.4),
-    zIndex: 10
-}
+  position: 'fixed',
+  backgroundColor: alpha(teal[500], 0.4),
+  zIndex: 10
+};
 
-const Toolbar = { 
-    textDecoration: "none", 
-    flexGrow: 1, 
-    display: "flex" 
-}
+const Toolbar = {
+  textDecoration: 'none',
+  flexGrow: 1,
+  display: 'flex'
+};
 
 const Link = {
-    textDecoration: "none",
-    textTransform: "capitalize",
-    display: "block",
-  }
-
-export {
-    Container, 
-    Link,
-    Toolbar
+  textDecoration: 'none',
+  textTransform: 'capitalize',
+  display: 'block'
 };
+
+export { Container, Link, Toolbar, AppBar };

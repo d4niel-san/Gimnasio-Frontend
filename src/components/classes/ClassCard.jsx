@@ -19,10 +19,14 @@ const ClassCard = ({
 }) => {
   const { joinClass } = React.useContext(ApiContext);
 
-  const handleJoin = () => {
-    console.log(id);
-    joinClass(id);
-  };
+  async function handleJoin() {
+    const response = await joinClass(id);
+    if (response) {
+      alert('Se ha registrdo correctamente a la clase');
+    } else {
+      alert('Ya se encontraba registrado en esa clase');
+    }
+  }
 
   return (
     <>

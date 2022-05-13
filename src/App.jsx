@@ -37,7 +37,11 @@ const BoxStyle = {
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   height: '100vh',
-  overflow: 'scroll'
+  overflow: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
 };
 
 export default App;

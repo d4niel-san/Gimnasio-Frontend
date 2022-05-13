@@ -83,11 +83,10 @@ const UserMain = () => {
           />
         </Box>
         <br />
-        {
-          //ClassList(userLogged.classes)
-        }
         <ClassList />
-        <Link to="/classes" style={{ textDecoration: 'none' }}>
+        <Link
+          to="/classes"
+          style={{ textDecoration: 'none', marginBottom: '15px', display: 'inline-block' }}>
           <Button color="primary" size="small" variant="contained">
             Listado de Clases
           </Button>

@@ -13,7 +13,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { ApiContext } from '../../context/apiContext';
 import * as Styles from './NavBarStyles';
-import * as services from './NavBarServices';
 
 const settings = ['profile', 'account', 'dashboard', 'logout'];
 
@@ -22,61 +21,72 @@ const NavBar = () => {
 
   const { isUserLogged } = useContext(ApiContext);
 
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={Styles.Container}>
-        <Toolbar disableGutters>
-          <Link to="/" style={Styles.Toolbar}>
-            <Typography color="secondary" variant="h6" noWrap component="div">
-              LEGION GYM
-            </Typography>
-          </Link>
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-          {isUserLogged ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={services.handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="https://i.pravatar.cc/100" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={services.handleCloseUserMenu}>
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={services.handleCloseUserMenu}>
-                    <Link
-                      to={`/${setting}`}
-                      //textAlign='center'
-                      color="primary"
-                      style={Styles.Link}>
-                      <Typography color="primary">{setting}</Typography>
-                    </Link>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          ) : (
-            <Link to="/signIn" style={{ textDecoration: 'none' }}>
-              <Button color="primary" size="small" variant="contained">
-                Sign In
-              </Button>
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <>
+      <AppBar position="static" sx={Styles.AppBar}>
+        <Container maxWidth="xl" sx={Styles.Container}>
+          <Toolbar disableGutters>
+            <Link to="/" style={Styles.Toolbar}>
+              <Typography color="secondary" variant="h6" noWrap component="div">
+                LEGION GYM
+              </Typography>
             </Link>
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+
+            {isUserLogged ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="https://i.pravatar.cc/100" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}>
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Link
+                        to={`/${setting}`}
+                        //textAlign='center'
+                        color="primary"
+                        style={Styles.Link}>
+                        <Typography color="primary">{setting}</Typography>
+                      </Link>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : (
+              <Link to="/signIn" style={{ textDecoration: 'none' }}>
+                <Button color="primary" size="small" variant="contained">
+                  Sign In
+                </Button>
+              </Link>
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <div style={{ height: '64px' }} />
+    </>
   );
 };
 export default NavBar;

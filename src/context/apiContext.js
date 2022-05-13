@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
-import apiAlert from './apiAlert';
 export const ApiContext = React.createContext(0);
 
 export const Context = ({ children }) => {

@@ -21,9 +21,12 @@ const App = () => {
       <Box sx={BoxStyle}>
         {showNavBar && <NavBar />}
         <Routes>
+          <Route path="/Logout" element={<SignIn />} />
           <Route path="/signIn" element={<SignIn />} />
+          <Route path="/Profile" element={<UserMain />} />
           <Route path="/userMain" element={<UserMain />} />
           <Route path="/classes" element={<Classes />} />
+          <Route path="/clases" element={<Classes />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Box>

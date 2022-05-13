@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { ApiContext } from '../../context/apiContext';
 import * as Styles from './NavBarStyles';
 
-const settings = ['profile', 'account', 'dashboard', 'logout'];
+const settings = ['Profile', 'Classes', 'Logout'];
 
 const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);

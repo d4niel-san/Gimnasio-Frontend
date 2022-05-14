@@ -1,12 +1,16 @@
-import { Container } from '@mui/material';
-import { useContext } from 'react';
+import { Alert, Container, Snackbar } from '@mui/material';
+import { useContext, useState } from 'react';
 import { ApiContext } from '../../context/apiContext';
 import NavBar from '../navbar';
 import ClassCard from './ClassCard';
 import * as styles from './ClassesStlyles';
+import * as generalStyles from '../generalStyles';
 
 const Classes = () => {
   const { classes } = useContext(ApiContext);
+  const [open, setOpen] = useState(false);
+  const [alertInfo, setAlertInfo] = useState('');
+  const handleClose = () => setOpen(false);
 
   const ClassList = () => {
     if (!classes) return null;
@@ -21,6 +25,8 @@ const Classes = () => {
         classDescription={element.classDescription}
         image={element.image}
         id={element._id}
+        setOpen={setOpen}
+        setAlertInfo={setAlertInfo}
       />
     ));
   };
@@ -28,10 +34,15 @@ const Classes = () => {
   return (
     <>
       <NavBar />
-      <Container component="main" maxWidth="xs" sx={styles.Container}>
+      <Container component="main" maxWidth="false" sx={generalStyles.Container}>
         Clases disponibles
         <ClassList />
       </Container>
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert severity={alertInfo.severity}>
+          <strong>{alertInfo.message}</strong>
+        </Alert>
+      </Snackbar>
     </>
   );
 };

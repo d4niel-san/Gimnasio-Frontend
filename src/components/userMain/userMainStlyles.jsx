@@ -1,7 +1,3 @@
-const Container = {
-  backgroundColor: 'third.main'
-};
-
 const Box = {
   marginTop: 1,
   marginLeft: 1.25,
@@ -18,4 +14,4 @@ const Box2 = {
   '& .MuiTextField-root': { m: 1, width: '20ch' }
 };
 
-export { Container, Box, Box2 };
+export { Box, Box2 };

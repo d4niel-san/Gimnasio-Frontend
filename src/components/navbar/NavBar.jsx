@@ -85,7 +85,6 @@ const NavBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <div style={{ height: '64px' }} />
     </>
   );
 };

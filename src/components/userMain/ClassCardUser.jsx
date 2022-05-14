@@ -1,4 +1,3 @@
-import { Done } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -23,14 +22,12 @@ const ClassCardUser = ({
     if (response) {
       updateClases();
       setAlertInfo({
-        title: 'Done',
         message: 'Se ha eliminado correctamente de la clase',
         severity: 'success'
       });
       setOpen(true);
     } else {
       setAlertInfo({
-        title: 'Error',
         message: 'No se encontraba registrado en esa clase',
         severity: 'error'
       });

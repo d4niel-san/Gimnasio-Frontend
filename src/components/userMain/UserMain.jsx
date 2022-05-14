@@ -1,6 +1,5 @@
 import {
   Alert,
-  AlertTitle,
   Box,
   Button,
   Checkbox,
@@ -14,13 +13,14 @@ import { Link, Navigate } from 'react-router-dom';
 import { ApiContext } from '../../context/apiContext';
 import ClassCardUser from './ClassCardUser';
 import * as styles from './userMainStlyles';
+import * as generalStyles from '../generalStyles';
 
 const UserMain = () => {
   const { userLogged, updateClases } = useContext(ApiContext);
   const [open, setOpen] = useState(false);
   const [alertInfo, setAlertInfo] = useState('');
-  const [checked, setChecked] = useState(userLogged.suscribed);
   const handleClose = () => setOpen(false);
+  const [checked, setChecked] = useState(userLogged.suscribed);
 
   useEffect(() => {
     updateClases();
@@ -55,10 +55,10 @@ const UserMain = () => {
   return (
     <>
       {earlyReturn()}
-      <Container component="main" maxWidth="xs" sx={styles.Container}>
+      <Container component="main" maxWidth="false" sx={generalStyles.Container}>
         Configuracion de Usuario
         <Box sx={styles.Box2}>
-          <div>
+          <div style={{ display: 'flex', width: '100%' }}>
             <TextField
               autoComplete="given-name"
               name="firstName"
@@ -67,6 +67,7 @@ const UserMain = () => {
               value={userLogged.firstName}
               autoFocus
               disabled
+              style={{ flex: 1 }}
             />
             <TextField
               autoComplete="given-name"
@@ -76,6 +77,7 @@ const UserMain = () => {
               value={userLogged.lastName}
               autoFocus
               disabled
+              style={{ flex: 1 }}
             />
           </div>
         </Box>

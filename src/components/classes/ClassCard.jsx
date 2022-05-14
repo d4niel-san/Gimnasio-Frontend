@@ -15,17 +15,26 @@ const ClassCard = ({
   teacherLastName,
   teacherFirstName,
   Number,
-  image
+  image,
+  setOpen,
+  setAlertInfo
 }) => {
   const { joinClass } = React.useContext(ApiContext);
 
   async function handleJoin() {
     const response = await joinClass(id);
     if (response) {
-      alert('Se ha registrado correctamente a la clase');
+      setAlertInfo({
+        message: 'Se ha registrado correctamente a la clase',
+        severity: 'success'
+      });
     } else {
-      alert('Ya se encontraba registrado en esa clase');
+      setAlertInfo({
+        message: 'Ya se encontraba registrado en esa clase',
+        severity: 'error'
+      });
     }
+    setOpen(true);
   }
 
   const { leaveClass } = React.useContext(ApiContext);
@@ -33,10 +42,17 @@ const ClassCard = ({
   async function handleLeave() {
     const response = await leaveClass(id);
     if (response) {
-      alert('Se ha eliminado correctamente de la clase');
+      setAlertInfo({
+        message: 'Se ha eliminado correctamente de la clase',
+        severity: 'success'
+      });
     } else {
-      alert('No se encontraba registrado en esa clase');
+      setAlertInfo({
+        message: 'No se encontraba registrado en esa clase',
+        severity: 'error'
+      });
     }
+    setOpen(true);
   }
 
   return (

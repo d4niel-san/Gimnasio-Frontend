@@ -1,4 +1,14 @@
-import { Box, Button, Checkbox, Container, FormControlLabel, TextField } from '@mui/material';
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Snackbar,
+  TextField
+} from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { ApiContext } from '../../context/apiContext';
@@ -7,8 +17,10 @@ import * as styles from './userMainStlyles';
 
 const UserMain = () => {
   const { userLogged, updateClases } = useContext(ApiContext);
-
+  const [open, setOpen] = useState(false);
+  const [alertInfo, setAlertInfo] = useState('');
   const [checked, setChecked] = useState(userLogged.suscribed);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     updateClases();
@@ -34,6 +46,8 @@ const UserMain = () => {
         teacherLastName={element.teacherLastName}
         classStartHour={element.classStartHour}
         id={element._id}
+        setOpen={setOpen}
+        setAlertInfo={setAlertInfo}
       />
     ));
   };
@@ -97,6 +111,11 @@ const UserMain = () => {
           </Button>
         </Link>
       </Container>
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert severity={alertInfo.severity}>
+          <strong>{alertInfo.message}</strong>
+        </Alert>
+      </Snackbar>
     </>
   );
 };

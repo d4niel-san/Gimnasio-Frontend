@@ -1,3 +1,4 @@
+import { Done } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -6,16 +7,34 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { ApiContext } from '../../context/apiContext';
 
-const ClassCardUser = ({ Name, classStartHour, teacherLastName, teacherFirstName, id }) => {
+const ClassCardUser = ({
+  Name,
+  classStartHour,
+  teacherLastName,
+  teacherFirstName,
+  id,
+  setOpen,
+  setAlertInfo
+}) => {
   const { leaveClass, updateClases } = React.useContext(ApiContext);
 
   async function handleLeave() {
     const response = await leaveClass(id);
     if (response) {
-      alert('Se ha eliminado correctamente de la clase');
       updateClases();
+      setAlertInfo({
+        title: 'Done',
+        message: 'Se ha eliminado correctamente de la clase',
+        severity: 'success'
+      });
+      setOpen(true);
     } else {
-      alert('No se encontraba registrado en esa clase');
+      setAlertInfo({
+        title: 'Error',
+        message: 'No se encontraba registrado en esa clase',
+        severity: 'error'
+      });
+      setOpen(true);
     }
   }
 

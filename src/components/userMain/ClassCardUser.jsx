@@ -4,8 +4,21 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { ApiContext } from '../../context/apiContext';
 
-const BasicCard = ({ Name, classStartHour, teacherLastName, teacherFirstName }) => {
+const ClassCardUser = ({ Name, classStartHour, teacherLastName, teacherFirstName, id }) => {
+  const { leaveClass, updateClases } = React.useContext(ApiContext);
+
+  async function handleLeave() {
+    const response = await leaveClass(id);
+    if (response) {
+      alert('Se ha eliminado correctamente de la clase');
+      updateClases();
+    } else {
+      alert('No se encontraba registrado en esa clase');
+    }
+  }
+
   return (
     <>
       <Card sx={{ minWidth: 275 }}>
@@ -19,7 +32,9 @@ const BasicCard = ({ Name, classStartHour, teacherLastName, teacherFirstName }) 
           <Typography variant="body2">{classStartHour}:00 hs</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Abandonar</Button>
+          <Button size="small" onClick={handleLeave}>
+            Abandonar
+          </Button>
         </CardActions>
       </Card>
       <br />
@@ -27,4 +42,4 @@ const BasicCard = ({ Name, classStartHour, teacherLastName, teacherFirstName }) 
   );
 };
 
-export default BasicCard;
+export default ClassCardUser;

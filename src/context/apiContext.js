@@ -17,7 +17,9 @@ export const Context = ({ children }) => {
 
   useEffect(() => {
     if (userLogged !== undefined) {
-      alert('Bienvenido ' + userLogged.firstName);
+      if (!isUserLogged) {
+        alert('Bienvenido ' + userLogged.firstName);
+      }
       setIsUserLogged(true);
     }
   }, [userLogged]);
@@ -83,6 +85,15 @@ export const Context = ({ children }) => {
     });
   }
 
+  async function updateClases() {
+    await api.post('/getUser', userLogged).then((response) => {
+      setUserLogged({
+        ...userLogged,
+        classes: response.data
+      });
+    });
+  }
+
   async function joinClass(idClase) {
     const data = { idClase, userLogged };
     let apiResponse;
@@ -110,7 +121,8 @@ export const Context = ({ children }) => {
         setShowNavBar,
         classes,
         joinClass,
-        leaveClass
+        leaveClass,
+        updateClases
       }}>
       {children}
     </ApiContext.Provider>

@@ -1,14 +1,18 @@
 import { Box, Button, Checkbox, Container, FormControlLabel, TextField } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { ApiContext } from '../../context/apiContext';
 import ClassCardUser from './ClassCardUser';
 import * as styles from './userMainStlyles';
 
 const UserMain = () => {
-  const { userLogged } = useContext(ApiContext);
+  const { userLogged, updateClases } = useContext(ApiContext);
 
   const [checked, setChecked] = useState(userLogged.suscribed);
+
+  useEffect(() => {
+    updateClases();
+  }, []);
 
   const handleChange = () => {
     setChecked(!checked);
@@ -29,6 +33,7 @@ const UserMain = () => {
         teacherFirstName={element.teacherFirstName}
         teacherLastName={element.teacherLastName}
         classStartHour={element.classStartHour}
+        id={element._id}
       />
     ));
   };

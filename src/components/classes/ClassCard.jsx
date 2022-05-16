@@ -19,7 +19,7 @@ const ClassCard = ({
   setOpen,
   setAlertInfo
 }) => {
-  const { joinClass } = React.useContext(ApiContext);
+  const { joinClass, userLogged, updateClases } = React.useContext(ApiContext);
 
   async function handleJoin() {
     const response = await joinClass(id);
@@ -28,6 +28,7 @@ const ClassCard = ({
         message: 'Se ha registrado correctamente a la clase',
         severity: 'success'
       });
+      updateClases();
     } else {
       setAlertInfo({
         message: 'Ya se encontraba registrado en esa clase',
@@ -46,6 +47,7 @@ const ClassCard = ({
         message: 'Se ha eliminado correctamente de la clase',
         severity: 'success'
       });
+      updateClases();
     } else {
       setAlertInfo({
         message: 'No se encontraba registrado en esa clase',
@@ -54,6 +56,29 @@ const ClassCard = ({
     }
     setOpen(true);
   }
+
+  const [joined, setjoined] = React.useState(false);
+
+  function userIsJoined() {
+    let resoultClase = userLogged.classes.find((element) => element._id === id);
+    resoultClase ? setjoined(true) : setjoined(false);
+
+    /*
+    userLogged.classes.forEach((element) => {
+      if (element._id === id) {
+        console.log('si: ', id);
+        setjoined(true);
+        return '';
+      }
+      console.log('no: ', id);
+      setjoined(false);
+    });*/
+  }
+
+  React.useEffect(() => {
+    userIsJoined();
+    //console.log(joined);
+  }, [userLogged.classes.length]);
 
   return (
     <>
@@ -79,10 +104,10 @@ const ClassCard = ({
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleJoin}>
+          <Button size="small" onClick={handleJoin} disabled={joined}>
             Join
           </Button>
-          <Button size="small" onClick={handleLeave}>
+          <Button size="small" onClick={handleLeave} disabled={!joined}>
             Leave
           </Button>
         </CardActions>

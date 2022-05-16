@@ -22,18 +22,18 @@ const UserMain = () => {
   const handleClose = () => setOpen(false);
   const [checked, setChecked] = useState(userLogged.suscribed);
 
+  const earlyReturn = () => {
+    if (!userLogged) {
+      Navigate('/', { replace: true });
+    }
+  };
+
   useEffect(() => {
     updateClases();
   }, []);
 
   const handleChange = () => {
     setChecked(!checked);
-  };
-
-  const earlyReturn = () => {
-    if (!userLogged) {
-      Navigate('/', { replace: true });
-    }
   };
 
   const ClassList = () => {

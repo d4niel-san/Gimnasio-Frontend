@@ -62,22 +62,10 @@ const ClassCard = ({
   function userIsJoined() {
     let resoultClase = userLogged.classes.find((element) => element._id === id);
     resoultClase ? setjoined(true) : setjoined(false);
-
-    /*
-    userLogged.classes.forEach((element) => {
-      if (element._id === id) {
-        console.log('si: ', id);
-        setjoined(true);
-        return '';
-      }
-      console.log('no: ', id);
-      setjoined(false);
-    });*/
   }
 
   React.useEffect(() => {
     userIsJoined();
-    //console.log(joined);
   }, [userLogged.classes.length]);
 
   return (

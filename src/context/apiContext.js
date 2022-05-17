@@ -1,3 +1,4 @@
+import { Logout } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
@@ -17,9 +18,9 @@ export const Context = ({ children }) => {
 
   useEffect(() => {
     if (userLogged !== undefined) {
-      if (!isUserLogged) {
+      /*if (!isUserLogged) {
         alert('Bienvenido ' + userLogged.firstName);
-      }
+      }*/
       setIsUserLogged(true);
     }
   }, [userLogged]);

@@ -9,24 +9,18 @@ import {
   TextField
 } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ApiContext } from '../../context/apiContext';
+import * as generalStyles from '../generalStyles';
 import ClassCardUser from './ClassCardUser';
 import * as styles from './userMainStlyles';
-import * as generalStyles from '../generalStyles';
 
 const UserMain = () => {
   const { userLogged, updateClases } = useContext(ApiContext);
   const [open, setOpen] = useState(false);
   const [alertInfo, setAlertInfo] = useState('');
   const handleClose = () => setOpen(false);
-  const [checked, setChecked] = useState(userLogged.suscribed);
-
-  const earlyReturn = () => {
-    if (!userLogged) {
-      Navigate('/', { replace: true });
-    }
-  };
+  const [checked, setChecked] = useState(userLogged?.suscribed);
 
   useEffect(() => {
     updateClases();
@@ -54,7 +48,6 @@ const UserMain = () => {
 
   return (
     <>
-      {earlyReturn()}
       <Container component="main" maxWidth="false" sx={generalStyles.Container}>
         Configuracion de Usuario
         <Box sx={styles.Box2}>
@@ -121,5 +114,4 @@ const UserMain = () => {
     </>
   );
 };
-
 export default UserMain;

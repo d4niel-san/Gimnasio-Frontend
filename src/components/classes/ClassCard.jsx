@@ -1,11 +1,14 @@
+//#region imports
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ApiContext } from '../../context/apiContext';
+import * as ClassCardServices from './ClassCardServices';
+//#endregion
 
 const ClassCard = ({
   id,
@@ -19,53 +22,18 @@ const ClassCard = ({
   setOpen,
   setAlertInfo
 }) => {
-  const { joinClass, userLogged, updateClases } = React.useContext(ApiContext);
+  const { joinClass, leaveClass, userLogged, updateClases } = useContext(ApiContext);
+  const [joined, setjoined] = useState(false);
 
   async function handleJoin() {
-    const response = await joinClass(id);
-    if (response) {
-      setAlertInfo({
-        message: 'Se ha registrado correctamente a la clase',
-        severity: 'success'
-      });
-      updateClases();
-    } else {
-      setAlertInfo({
-        message: 'Ya se encontraba registrado en esa clase',
-        severity: 'error'
-      });
-    }
-    setOpen(true);
+    ClassCardServices.handleJoin(setOpen, setAlertInfo, id, joinClass, updateClases);
   }
-
-  const { leaveClass } = React.useContext(ApiContext);
-
   async function handleLeave() {
-    const response = await leaveClass(id);
-    if (response) {
-      setAlertInfo({
-        message: 'Se ha eliminado correctamente de la clase',
-        severity: 'success'
-      });
-      updateClases();
-    } else {
-      setAlertInfo({
-        message: 'No se encontraba registrado en esa clase',
-        severity: 'error'
-      });
-    }
-    setOpen(true);
+    ClassCardServices.handleLeave(setOpen, setAlertInfo, id, updateClases, leaveClass);
   }
 
-  const [joined, setjoined] = React.useState(false);
-
-  function userIsJoined() {
-    let resoultClase = userLogged.classes.find((element) => element._id === id);
-    resoultClase ? setjoined(true) : setjoined(false);
-  }
-
-  React.useEffect(() => {
-    userIsJoined();
+  useEffect(() => {
+    ClassCardServices.userIsJoined(id, setjoined, userLogged);
   }, [userLogged.classes.length]);
 
   return (
@@ -104,5 +72,4 @@ const ClassCard = ({
     </>
   );
 };
-
 export default ClassCard;

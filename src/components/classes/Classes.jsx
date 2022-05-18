@@ -1,10 +1,11 @@
+//#region imports
 import { Alert, Container, Snackbar } from '@mui/material';
 import { useContext, useState } from 'react';
 import { ApiContext } from '../../context/apiContext';
+import * as generalStyles from '../generalStyles';
 import NavBar from '../navbar';
 import ClassCard from './ClassCard';
-import * as styles from './ClassesStlyles';
-import * as generalStyles from '../generalStyles';
+//#endregion
 
 const Classes = () => {
   const { classes } = useContext(ApiContext);
@@ -46,5 +47,4 @@ const Classes = () => {
     </>
   );
 };
-
 export default Classes;

@@ -1,3 +1,4 @@
+//#region imports
 import React, { useContext, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -14,7 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import * as styles from './SignInStlyles';
 import { ApiContext } from '../../context/apiContext';
-
+//#endregion
 const SignIn = () => {
   const { SignInSubmit, setShowNavBar } = useContext(ApiContext);
 

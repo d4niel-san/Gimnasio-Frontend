@@ -1,3 +1,4 @@
+//#region imports
 import {
   Alert,
   Box,
@@ -14,7 +15,7 @@ import { ApiContext } from '../../context/apiContext';
 import * as generalStyles from '../generalStyles';
 import ClassCardUser from './ClassCardUser';
 import * as styles from './userMainStlyles';
-
+//#endregion
 const UserMain = () => {
   const { userLogged, updateClases } = useContext(ApiContext);
   const [open, setOpen] = useState(false);

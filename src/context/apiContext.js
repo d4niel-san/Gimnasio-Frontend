@@ -1,4 +1,3 @@
-import { Logout } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
@@ -18,9 +17,6 @@ export const Context = ({ children }) => {
 
   useEffect(() => {
     if (userLogged !== undefined) {
-      /*if (!isUserLogged) {
-        alert('Bienvenido ' + userLogged.firstName);
-      }*/
       setIsUserLogged(true);
     }
   }, [userLogged]);
@@ -68,12 +64,7 @@ export const Context = ({ children }) => {
     await api
       .post('/newUser', newUser)
       .then((response) => {
-        setIsUserLogged(true);
-        const logUser = {
-          email: newUser.email,
-          password: newUser.password
-        };
-        logUserToBack(logUser);
+        navigate('/signIn', { replace: true });
       })
       .catch((error) => {
         console.log(error);

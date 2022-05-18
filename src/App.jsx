@@ -1,3 +1,4 @@
+//#region imports
 import { ThemeProvider } from '@emotion/react';
 import { Box, CssBaseline } from '@mui/material';
 import { useContext } from 'react';
@@ -12,7 +13,7 @@ import SignIn from './components/signIn';
 import UserMain from './components/userMain/UserMain';
 import { ApiContext } from './context/apiContext';
 import generalTheme from './themes/generalTheme';
-
+//#endregion
 const App = () => {
   const { showNavBar, isUserLogged } = useContext(ApiContext);
 

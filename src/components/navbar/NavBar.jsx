@@ -1,3 +1,4 @@
+//#region imports
 import React, { useState, useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,7 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { ApiContext } from '../../context/apiContext';
 import * as Styles from './NavBarStyles';
-
+//#endregion
 const settings = ['Profile', 'Classes', 'Logout'];
 
 const NavBar = () => {

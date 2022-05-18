@@ -1,3 +1,4 @@
+//#region imports
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { MenuItem, Snackbar } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
@@ -16,7 +17,7 @@ import { ApiContext } from '../../context/apiContext';
 import * as styles from './SignUpStyles';
 import suscriptionAlert from './suscriptionAlert';
 import paymentMethods from './Suscriptions';
-
+//#endregion
 const SignUp = () => {
   const { SignUpSubmit } = useContext(ApiContext);
   const initialPayment = paymentMethods.filter((elem) => elem.id === 4)[0];

@@ -3,12 +3,10 @@
 Aplicacion desarrollada para el "Final de Programación III" 
 
 Tecnologias utilizadas 
-  - React
+	- JavaScript
+	- React
 	- Material UI
 	- Bootstrap
-
-
-
 
 https://user-images.githubusercontent.com/91570360/214308762-68a308d5-ee9b-4a88-bb3c-f541035f5e77.mp4
 

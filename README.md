@@ -2,7 +2,7 @@
 
 Aplicacion desarrollada para el "Final de Programación III" 
 
-Tecnologias utilizadas 
+Tecnologias utilizadas:
 
 - JavaScript
 - React
